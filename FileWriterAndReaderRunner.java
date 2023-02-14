@@ -6,6 +6,7 @@ import java.util.List;
 
 public class FileWriterAndReaderRunner {
     public static final String FILE_NAME = "product.txt";
+    private static Object Product;
 
     public static void main(String[] args) {
         int ops = Utils.collectIntegerInput("Select operation \n1.Add Product \n2.View Product \n3.Delete Product \n4.Update Product \n5.Sell Product \n6.Exit");
@@ -26,7 +27,10 @@ public class FileWriterAndReaderRunner {
                 }
             } else if (ops==3){
                 int inputID = Utils.displayMessage("please enter the Id of product you want to delete");
-
+                if (inputID <= 5 ){
+                    Utils.getProductsFromFile(new File("product.txt")) -- inputID;
+                    Product -inputID;
+                }
             }
             ops = Utils.collectIntegerInput("Select operation \n1.Add Product \n2.View Product \n3.Delete Product \n4.Update Product \n5.Sell Product");
         }

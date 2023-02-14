@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Utils {
+    private boolean isDeleted;
+
+
     static int collectIntegerInput(String message){
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
@@ -100,4 +103,9 @@ public class Utils {
         System.out.println("message");
         return scanner.nextInt();
     }
+
+    public void delete(int id) { this.isDeleted = true;
+    }
+
+
 }
