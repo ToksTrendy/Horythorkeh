@@ -1,38 +1,31 @@
 package writer;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileNotFoundException;
+
+import static writer.AppConstants.FILE;
 
 public class FileWriterAndReaderRunner {
-    public static final String FILE_NAME = "product.txt";
-    private static Object Product;
 
-    public static void main(String[] args) {
-        int ops = Utils.collectIntegerInput("Select operation \n1.Add Product \n2.View Product \n3.Delete Product \n4.Update Product \n5.Sell Product \n6.Exit");
+    public static void main(String[] args) throws FileNotFoundException {
+        if (FILE.exists()) {
+            Utils.getProductsFromFile();
+        }
+
+        int ops = Utils.collectIntegerInput("Select operation \n1.Add Product \n2.View Product \n3.Delete Product \n4.Sell Product \n5.Update Product \n6.Exit");
         while(ops != 6){
             if(ops == 1){
-                File file = new File(FILE_NAME);
-                List<Product> productList= new ArrayList<>();
-                if (file.exists()) {
-                    productList = Utils.getProductsFromFile(file);
-                }
-                Utils.getProductsFromUser(productList);
-                Utils.saveToFile(file, productList);
-            }else if(ops==2){
-                Object file;
-                String productList = Utils.readFromFile(new File("product.txt"));
-                if(productList != null){
-                    System.out.println(productList);
-                }
-            } else if (ops==3){
-                int inputID = Utils.displayMessage("please enter the Id of product you want to delete");
-                if (inputID <= 5 ){
-                    Utils.getProductsFromFile(new File("product.txt")) -- inputID;
-                    Product -inputID;
-                }
+                Utils.getProductsFromUser();
+                Utils.saveToFile();
+            }else if(ops == 2){
+                Utils.viewProducts();
+            } else if (ops == 3){
+                Utils.delete();
+            }else if (ops == 4){
+                Utils.sell();
+            }else {
+                Utils.update();
             }
-            ops = Utils.collectIntegerInput("Select operation \n1.Add Product \n2.View Product \n3.Delete Product \n4.Update Product \n5.Sell Product");
+            ops = Utils.collectIntegerInput("Select operation \n1.Add Product \n2.View Product \n3.Delete Product \n4.Sell Product \n5.Update Product \n6.Exit");
         }
     }
 }
